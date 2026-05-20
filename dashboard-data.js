@@ -2,7 +2,7 @@ window.dashboardData = {
   title: "Membership Performance Overview",
   summary: "A focused view of member growth, renewal momentum, revenue, and regional performance.",
   year: "2026",
-  currentPeriod: "May 2026",
+  currentPeriod: "2026",
   period: "2026 Year to Date",
   currentThrough: "Current through May",
   visibleMonths: ["Jan", "Feb", "Mar", "Apr", "May"],
