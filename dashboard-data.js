@@ -25,6 +25,10 @@ window.dashboardData = {
     { membership: "Annual", total: 158822, monthly: [12544, 56519, 50550, 33237, 5972] },
     { membership: "Lifetime", total: 174414, monthly: [26404, 53005, 41602, 53403, 0] },
   ],
+  revenueYoY: [
+    { membership: "Annual", year: 2026, revenue: 158822, previousYearRevenue: 197073, difference: -38251, growthPercent: -19.41 },
+    { membership: "Lifetime", year: 2026, revenue: 174414, previousYearRevenue: 409024, difference: -234610, growthPercent: -57.36 },
+  ],
   renewalRateSeries: [
     { month: "Jan", rate: 52.46, eligibleCount: 61, renewalCount: 32 },
     { month: "Feb", rate: 73.37, eligibleCount: 169, renewalCount: 124 },
