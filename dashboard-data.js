@@ -77,6 +77,5 @@ window.dashboardData = {
     { membershipType: "Annual", totalMembers: 1249 },
     { membershipType: "Annual Member - Spouse", totalMembers: 595 },
     { membershipType: "Annual Member - Future Hotelier", totalMembers: 196 },
-    { membershipType: "Prospect Member", totalMembers: 2 },
   ],
 };
