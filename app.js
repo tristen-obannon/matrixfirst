@@ -1,7 +1,6 @@
 const chartPalette = ["#004b8d", "#1f7f9b", "#69a8cf", "#63758c", "#356f92", "#9aaec2"];
 const newMemberColor = "#69a8cf";
 const renewalColor = "#004b8d";
-
 const analysisCopy = {
   growth: {
     title: "Member acquisition by category",
@@ -28,7 +27,6 @@ const analysisCopy = {
     description: "Understand how new members and renewals contribute to each month's combined membership count.",
   },
 };
-
 const tableCopy = {
   months: {
     title: "Strongest months for new and renewed members",
@@ -79,7 +77,6 @@ function renderBriefing(data) {
   const secondMonth = data.topMonths[1];
   const topRegion = data.topRegions[0];
   const secondRegion = data.topRegions[1];
-  const latestRetention = data.renewalRateSeries[data.renewalRateSeries.length - 1];
   const strongestRetention = [...data.renewalRateSeries].sort((a, b) => b.rate - a.rate)[0];
   const weakestRetention = [...data.renewalRateSeries].sort((a, b) => a.rate - b.rate)[0];
   const topMonthLead = topMonth.totalMembers - secondMonth.totalMembers;
@@ -218,7 +215,9 @@ function renderRevenueChart(months, series) {
 
 function renderRevenueYoY(rows) {
   const target = document.getElementById("revenue-yoy-summary");
-  if (!target || !rows.length) return;
+  if (!target || !rows.length) {
+    return;
+  }
 
   const totalCurrent = rows.reduce((sum, row) => sum + row.revenue, 0);
   const totalPrevious = rows.reduce((sum, row) => sum + row.previousYearRevenue, 0);
@@ -426,9 +425,15 @@ function renderTable(tableId, columns, rows) {
   const thead = table.querySelector("thead");
   const tbody = table.querySelector("tbody");
 
-  thead.innerHTML = `<tr>${columns.map((column) => `<th>${escapeHtml(column.label)}</th>`).join("")}</tr>`;
+  thead.innerHTML = `
+    <tr>
+      ${columns.map((column) => `<th>${escapeHtml(column.label)}</th>`).join("")}
+    </tr>
+  `;
   tbody.innerHTML = rows.map((row) => `
-    <tr>${columns.map((column) => `<td class="${column.className || ""}">${column.render(row)}</td>`).join("")}</tr>
+    <tr>
+      ${columns.map((column) => `<td class="${column.className || ""}">${column.render(row)}</td>`).join("")}
+    </tr>
   `).join("");
 }
 
@@ -463,7 +468,9 @@ function escapeHtml(value) {
 }
 
 function formatInteger(value) {
-  return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value || 0);
+  return new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 0,
+  }).format(value || 0);
 }
 
 function formatCurrency(value) {
@@ -491,7 +498,4 @@ function formatSignedPercent(value) {
   const numeric = Number(value || 0);
   const sign = numeric > 0 ? "+" : "";
   return `${sign}${numeric.toFixed(1)}%`;
-}
-function formatPercent(value) {
-  return `${Number(value || 0).toFixed(1)}%`;
 }
