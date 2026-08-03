@@ -60,6 +60,7 @@ function renderDashboard(data) {
 
   renderBriefing(data);
   renderSignals(data);
+  renderInitiatives(data.initiatives);
   renderAcquisitionByCategory(data.newMembersSeries);
   renderRenewalRateChart(data.renewalRateSeries);
   renderRevenueChart(data.visibleMonths, data.revenueSeries);
@@ -72,13 +73,77 @@ function renderDashboard(data) {
   renderActiveMembersTable(data.activeMembers);
 }
 
+function renderInitiatives(initiatives = {}) {
+  const hocs = initiatives.hocs || [];
+  const summaryTarget = document.getElementById("hoc-summary");
+  const listTarget = document.getElementById("hoc-initiative-list");
+  const totalTarget = document.getElementById("hoc-cumulative-total");
+
+  if (!summaryTarget || !listTarget || !totalTarget) {
+    return;
+  }
+
+  const totalAnnual = hocs.reduce((sum, hoc) => sum + (hoc.newAnnualMembers || 0), 0);
+  const totalLifetime = hocs.reduce((sum, hoc) => sum + (hoc.newLifetimeMembers || 0), 0);
+  const totalMembers = totalAnnual + totalLifetime;
+
+  summaryTarget.innerHTML = `
+    <span>
+      <strong>${formatInteger(hocs.length)}</strong>
+      <span>HOCs Included</span>
+    </span>
+    <span>
+      <strong>${formatInteger(totalAnnual)}</strong>
+      <span>New Annual Members</span>
+    </span>
+    <span>
+      <strong>${formatInteger(totalLifetime)}</strong>
+      <span>New Lifetime Members</span>
+    </span>
+    <span>
+      <strong>${formatInteger(totalMembers)}</strong>
+      <span>Total New Members</span>
+    </span>
+  `;
+
+  listTarget.innerHTML = hocs.map((hoc) => `
+    <article class="hoc-card">
+      <div class="hoc-detail">
+        <span class="hoc-date">${escapeHtml(hoc.date)}</span>
+        <div>
+          <h3>${escapeHtml(hoc.region)}</h3>
+          <p>${escapeHtml(hoc.location)}</p>
+        </div>
+      </div>
+      <div class="hoc-metrics">
+        <span>
+          <strong>${formatInteger(hoc.newAnnualMembers)}</strong>
+          <span>Annual</span>
+        </span>
+        <span>
+          <strong>${formatInteger(hoc.newLifetimeMembers)}</strong>
+          <span>Lifetime</span>
+        </span>
+      </div>
+    </article>
+  `).join("");
+
+  totalTarget.innerHTML = `
+    <span>Cumulative HOC Membership Impact</span>
+    <strong>${formatInteger(totalMembers)}</strong>
+    <p>${formatInteger(totalAnnual)} annual + ${formatInteger(totalLifetime)} lifetime members from included HOCs.</p>
+  `;
+}
+
 function renderBriefing(data) {
   const topMonth = data.topMonths[0];
   const secondMonth = data.topMonths[1];
   const topRegion = data.topRegions[0];
   const secondRegion = data.topRegions[1];
+  const latestRetention = data.renewalRateSeries[data.renewalRateSeries.length - 1];
   const strongestRetention = [...data.renewalRateSeries].sort((a, b) => b.rate - a.rate)[0];
   const weakestRetention = [...data.renewalRateSeries].sort((a, b) => a.rate - b.rate)[0];
+  const lifetimeActive = data.activeMembers.find((member) => member.membershipType === "Lifetime")?.totalMembers || 0;
   const topMonthLead = topMonth.totalMembers - secondMonth.totalMembers;
   const topRegionLead = topRegion.totalMembers - secondRegion.totalMembers;
   const retentionSpread = strongestRetention.rate - weakestRetention.rate;
@@ -286,7 +351,7 @@ function renderHorizontalBars(id, rows, { valueFormatter }) {
 
   target.innerHTML = `
     <div class="hbar-chart" role="img" aria-label="Horizontal bar chart">
-      ${rows.map((row) => {
+      ${rows.map((row, index) => {
         const width = Math.max((row.value / max) * 100, 1);
         return `
           <div class="hbar-row">
