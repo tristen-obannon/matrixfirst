@@ -75,17 +75,21 @@ function renderDashboard(data) {
 
 function renderInitiatives(initiatives = {}) {
   const hocs = initiatives.hocs || [];
+  const wwyb = initiatives.wwyb || {};
   const summaryTarget = document.getElementById("hoc-summary");
   const listTarget = document.getElementById("hoc-initiative-list");
   const totalTarget = document.getElementById("hoc-cumulative-total");
+  const wwybDescription = document.getElementById("wwyb-description");
+  const wwybStats = document.getElementById("wwyb-stats");
 
-  if (!summaryTarget || !listTarget || !totalTarget) {
+  if (!summaryTarget || !listTarget || !totalTarget || !wwybDescription || !wwybStats) {
     return;
   }
 
   const totalAnnual = hocs.reduce((sum, hoc) => sum + (hoc.newAnnualMembers || 0), 0);
   const totalLifetime = hocs.reduce((sum, hoc) => sum + (hoc.newLifetimeMembers || 0), 0);
   const totalMembers = totalAnnual + totalLifetime;
+  const hocsWithMemberships = hocs.filter((hoc) => (hoc.newAnnualMembers || 0) + (hoc.newLifetimeMembers || 0) > 0);
 
   summaryTarget.innerHTML = `
     <span>
@@ -106,7 +110,7 @@ function renderInitiatives(initiatives = {}) {
     </span>
   `;
 
-  listTarget.innerHTML = hocs.map((hoc) => `
+  listTarget.innerHTML = hocsWithMemberships.map((hoc) => `
     <article class="hoc-card">
       <div class="hoc-detail">
         <span class="hoc-date">${escapeHtml(hoc.date)}</span>
@@ -133,6 +137,26 @@ function renderInitiatives(initiatives = {}) {
     <strong>${formatInteger(totalMembers)}</strong>
     <p>${formatInteger(totalAnnual)} annual + ${formatInteger(totalLifetime)} lifetime members from included HOCs.</p>
   `;
+
+  wwybDescription.textContent = `${wwyb.description || ""} The campaign is supported by ${formatInteger(wwyb.inboxes)} inboxes across Outlook, Gmail, and Zoho.`;
+
+  const campaignStats = [
+    { label: "New Memberships", value: formatInteger(wwyb.newMemberships) },
+    { label: "Revenue Generated", value: formatCurrency(wwyb.revenueGenerated) },
+    { label: "Unique Replies", value: formatInteger(wwyb.uniqueReplies) },
+    { label: "Business Development Leads", value: formatInteger(wwyb.businessDevelopmentLeads) },
+    { label: "Completed Sequence", value: formatInteger(wwyb.completedContacts) },
+    { label: "Bounce Rate", value: formatPercent(wwyb.bounceRate) },
+    { label: "Estimated Prospects", value: `~${formatInteger(wwyb.totalProspects)}` },
+    { label: "Campaign Inboxes", value: formatInteger(wwyb.inboxes) },
+  ];
+
+  wwybStats.innerHTML = campaignStats.map((stat) => `
+    <span>
+      <span>${escapeHtml(stat.label)}</span>
+      <strong>${escapeHtml(stat.value)}</strong>
+    </span>
+  `).join("");
 }
 
 function renderBriefing(data) {
@@ -143,7 +167,6 @@ function renderBriefing(data) {
   const latestRetention = data.renewalRateSeries[data.renewalRateSeries.length - 1];
   const strongestRetention = [...data.renewalRateSeries].sort((a, b) => b.rate - a.rate)[0];
   const weakestRetention = [...data.renewalRateSeries].sort((a, b) => a.rate - b.rate)[0];
-  const lifetimeActive = data.activeMembers.find((member) => member.membershipType === "Lifetime")?.totalMembers || 0;
   const topMonthLead = topMonth.totalMembers - secondMonth.totalMembers;
   const topRegionLead = topRegion.totalMembers - secondRegion.totalMembers;
   const retentionSpread = strongestRetention.rate - weakestRetention.rate;
@@ -223,6 +246,16 @@ function renderSignals(data) {
 }
 
 function setupInteractions() {
+  document.querySelectorAll(".initiative-tab").forEach((button) => {
+    button.addEventListener("click", () => {
+      const initiative = button.dataset.initiative;
+      document.querySelectorAll(".initiative-tab").forEach((tab) => tab.classList.toggle("is-active", tab === button));
+      document.querySelectorAll(".initiative-panel").forEach((panel) => {
+        panel.classList.toggle("is-active", panel.dataset.initiativePanel === initiative);
+      });
+    });
+  });
+
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
       const view = button.dataset.view;
@@ -351,7 +384,7 @@ function renderHorizontalBars(id, rows, { valueFormatter }) {
 
   target.innerHTML = `
     <div class="hbar-chart" role="img" aria-label="Horizontal bar chart">
-      ${rows.map((row, index) => {
+      ${rows.map((row) => {
         const width = Math.max((row.value / max) * 100, 1);
         return `
           <div class="hbar-row">
@@ -516,6 +549,7 @@ function fullMonth(month) {
     Jun: "June",
     Jul: "July",
     Aug: "August",
+    Sept: "September",
     Sep: "September",
     Oct: "October",
     Nov: "November",
