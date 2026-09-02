@@ -13,7 +13,7 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand-lockup" aria-label="AAHOA">
-        <img src="aahoa_logo.jfif" alt="AAHOA">
+        <img src="./aahoa_logo.jfif" alt="AAHOA">
       </div>
     </header>
 
@@ -79,15 +79,29 @@
             <h2>Initiatives</h2>
             <p>Track priority initiatives that support new annual and lifetime membership growth.</p>
           </div>
-          <div class="initiative-summary" id="hoc-summary" aria-label="Membership development initiative totals"></div>
         </div>
-        <div class="initiative-program-header">
-          <span>Current Initiative</span>
-          <h3>Hotel Owner Conferences</h3>
-          <p>Completed and in-period regional events through August 1, 2026.</p>
+        <div class="initiative-switcher" aria-label="Initiative view">
+          <button class="initiative-tab is-active" type="button" data-initiative="hocs">HOCs</button>
+          <button class="initiative-tab" type="button" data-initiative="wwyb">Cold Email Campaign</button>
         </div>
-        <div class="hoc-grid" id="hoc-initiative-list"></div>
-        <div class="initiative-total" id="hoc-cumulative-total"></div>
+        <article class="initiative-panel is-active" data-initiative-panel="hocs">
+          <div class="initiative-program-header">
+            <span>Current Initiative</span>
+            <h3>Hotel Owner Conferences</h3>
+            <p>Completed and in-period regional events through August 31, 2026.</p>
+          </div>
+          <div class="initiative-summary" id="hoc-summary" aria-label="Hotel Owner Conference totals"></div>
+          <div class="hoc-grid" id="hoc-initiative-list"></div>
+          <div class="initiative-total" id="hoc-cumulative-total"></div>
+        </article>
+        <article class="initiative-panel" data-initiative-panel="wwyb">
+          <div class="initiative-program-header">
+            <span>Campaign Initiative</span>
+            <h3>We Want You Back</h3>
+            <p id="wwyb-description"></p>
+          </div>
+          <div class="campaign-stats" id="wwyb-stats"></div>
+        </article>
       </section>
 
       <section class="workspace">
@@ -169,7 +183,7 @@
     </main>
   </div>
 
-  <script src="./dashboard-data.js?v=2026-08-01"></script>
+  <script src="./dashboard-data.js?v=2026-09-01"></script>
   <script src="./app.js"></script>
 </body>
 </html>
