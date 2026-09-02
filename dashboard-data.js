@@ -4,7 +4,7 @@ window.dashboardData = {
   "year": "2026",
   "currentPeriod": "2026",
   "period": "2026 Year to Date",
-  "currentThrough": "Current through July",
+  "currentThrough": "Current through August",
   "visibleMonths": [
     "Jan",
     "Feb",
@@ -12,19 +12,20 @@ window.dashboardData = {
     "Apr",
     "May",
     "Jun",
-    "Jul"
+    "Jul",
+    "Aug"
   ],
   "kpis": {
-    "newMembers": 987,
-    "renewals": 574,
-    "revenue": 373713,
-    "activeMembers": 16926,
-    "expiring": 100
+    "newMembers": 1045,
+    "renewals": 669,
+    "revenue": 412015,
+    "activeMembers": 16950,
+    "expiring": 63
   },
   "newMembersSeries": [
     {
       "membership": "Annual",
-      "total": 496,
+      "total": 519,
       "monthly": [
         33,
         131,
@@ -32,38 +33,41 @@ window.dashboardData = {
         112,
         15,
         20,
-        26
+        26,
+        23
       ]
     },
     {
       "membership": "Annual Member - Future Hotelier",
-      "total": 81,
+      "total": 84,
       "monthly": [
         3,
-        30,
-        15,
+        29,
+        17,
         24,
         0,
         1,
-        8
+        8,
+        2
       ]
     },
     {
       "membership": "Annual Member - Spouse",
-      "total": 213,
+      "total": 236,
       "monthly": [
         6,
         62,
-        75,
+        76,
         41,
         5,
         9,
-        15
+        15,
+        22
       ]
     },
     {
       "membership": "Lifetime",
-      "total": 38,
+      "total": 40,
       "monthly": [
         4,
         10,
@@ -71,12 +75,13 @@ window.dashboardData = {
         14,
         2,
         1,
-        0
+        0,
+        2
       ]
     },
     {
       "membership": "Lifetime Member - Future Hotelier",
-      "total": 111,
+      "total": 117,
       "monthly": [
         7,
         13,
@@ -84,12 +89,13 @@ window.dashboardData = {
         28,
         6,
         6,
-        12
+        12,
+        6
       ]
     },
     {
       "membership": "Lifetime Member - Spouse",
-      "total": 48,
+      "total": 49,
       "monthly": [
         3,
         13,
@@ -97,14 +103,15 @@ window.dashboardData = {
         10,
         1,
         2,
-        2
+        2,
+        1
       ]
     }
   ],
   "revenueSeries": [
     {
       "membership": "Annual",
-      "total": 187498,
+      "total": 208198,
       "monthly": [
         12544,
         56519,
@@ -112,12 +119,13 @@ window.dashboardData = {
         33237,
         9565,
         10352,
-        14333
+        14333,
+        20700
       ]
     },
     {
       "membership": "Lifetime",
-      "total": 186215,
+      "total": 203817,
       "monthly": [
         26404,
         53005,
@@ -125,7 +133,8 @@ window.dashboardData = {
         53403,
         3000,
         3000,
-        5801
+        5801,
+        17602
       ]
     }
   ],
@@ -133,18 +142,18 @@ window.dashboardData = {
     {
       "membership": "Annual",
       "year": 2026,
-      "revenue": 187498,
+      "revenue": 208198,
       "previousYearRevenue": 197073,
-      "difference": -9575,
-      "growthPercent": -4.86
+      "difference": 11125,
+      "growthPercent": 5.65
     },
     {
       "membership": "Lifetime",
       "year": 2026,
-      "revenue": 186215,
+      "revenue": 203817,
       "previousYearRevenue": 409024,
-      "difference": -222809,
-      "growthPercent": -54.47
+      "difference": -205207,
+      "growthPercent": -50.17
     }
   ],
   "renewalRateSeries": [
@@ -180,8 +189,8 @@ window.dashboardData = {
     },
     {
       "month": "Jun",
-      "rate": 88.64,
-      "eligibleCount": 44,
+      "rate": 86.67,
+      "eligibleCount": 45,
       "renewalCount": 39
     },
     {
@@ -189,6 +198,12 @@ window.dashboardData = {
       "rate": 84.75,
       "eligibleCount": 59,
       "renewalCount": 50
+    },
+    {
+      "month": "Aug",
+      "rate": 89.62,
+      "eligibleCount": 106,
+      "renewalCount": 95
     }
   ],
   "topMonths": [
@@ -218,6 +233,14 @@ window.dashboardData = {
     },
     {
       "rank": 4,
+      "month": "Aug",
+      "newMembers": 23,
+      "renewals": 95,
+      "totalMembers": 118,
+      "revenue": 20700
+    },
+    {
+      "rank": 5,
       "month": "Jul",
       "newMembers": 26,
       "renewals": 50,
@@ -225,7 +248,7 @@ window.dashboardData = {
       "revenue": 14333
     },
     {
-      "rank": 5,
+      "rank": 6,
       "month": "May",
       "newMembers": 15,
       "renewals": 61,
@@ -233,7 +256,7 @@ window.dashboardData = {
       "revenue": 9565
     },
     {
-      "rank": 6,
+      "rank": 7,
       "month": "Jan",
       "newMembers": 33,
       "renewals": 32,
@@ -241,7 +264,7 @@ window.dashboardData = {
       "revenue": 12544
     },
     {
-      "rank": 7,
+      "rank": 8,
       "month": "Jun",
       "newMembers": 20,
       "renewals": 39,
@@ -252,82 +275,82 @@ window.dashboardData = {
   "topRegions": [
     {
       "region": "Mid Atlantic",
-      "newMembers": 85,
-      "renewals": 33,
-      "totalMembers": 118,
-      "revenue": 21692,
+      "newMembers": 86,
+      "renewals": 36,
+      "totalMembers": 122,
+      "revenue": 22488,
       "rank": 1
     },
     {
       "region": "South Florida",
       "newMembers": 20,
-      "renewals": 95,
-      "totalMembers": 115,
-      "revenue": 20497,
+      "renewals": 96,
+      "totalMembers": 116,
+      "revenue": 20696,
       "rank": 2
     },
     {
-      "region": "Washington D.C. Area",
-      "newMembers": 55,
-      "renewals": 32,
-      "totalMembers": 87,
-      "revenue": 16318,
+      "region": "Georgia",
+      "newMembers": 42,
+      "renewals": 58,
+      "totalMembers": 100,
+      "revenue": 14328,
       "rank": 3
     },
     {
-      "region": "Northeast",
+      "region": "Washington D.C. Area",
       "newMembers": 56,
-      "renewals": 30,
-      "totalMembers": 86,
-      "revenue": 16521,
+      "renewals": 34,
+      "totalMembers": 90,
+      "revenue": 16716,
       "rank": 4
     },
     {
-      "region": "Georgia",
-      "newMembers": 38,
-      "renewals": 44,
-      "totalMembers": 82,
-      "revenue": 11144,
+      "region": "Northeast",
+      "newMembers": 57,
+      "renewals": 31,
+      "totalMembers": 88,
+      "revenue": 16919,
       "rank": 5
     },
     {
       "region": "Greater Los Angeles Area",
       "newMembers": 14,
-      "renewals": 58,
-      "totalMembers": 72,
-      "revenue": 6201,
+      "renewals": 62,
+      "totalMembers": 76,
+      "revenue": 6204,
       "rank": 6
     },
     {
       "region": "Upper Midwest",
-      "newMembers": 26,
-      "renewals": 25,
-      "totalMembers": 51,
-      "revenue": 9155,
+      "newMembers": 31,
+      "renewals": 36,
+      "totalMembers": 67,
+      "revenue": 12140,
       "rank": 7
+    },
+    {
+      "region": "Northwest",
+      "newMembers": 15,
+      "renewals": 42,
+      "totalMembers": 57,
+      "revenue": 10746,
+      "rank": 8
     },
     {
       "region": "North Texas",
       "newMembers": 28,
-      "renewals": 22,
-      "totalMembers": 50,
-      "revenue": 8756,
-      "rank": 8
-    },
-    {
-      "region": "North Carolina",
-      "newMembers": 12,
-      "renewals": 28,
-      "totalMembers": 40,
-      "revenue": 6966,
+      "renewals": 23,
+      "totalMembers": 51,
+      "revenue": 8956,
       "rank": 9
     },
     {
-      "region": "Southwest",
-      "newMembers": 22,
-      "renewals": 17,
-      "totalMembers": 39,
-      "revenue": 7363,
+      "region": "North Central",
+      "newMembers": 24,
+      "renewals": 21,
+      "totalMembers": 45,
+      "revenue": 8756,
       "rank": 10
     }
   ],
@@ -366,6 +389,11 @@ window.dashboardData = {
       "month": "Jul",
       "New": 26,
       "Renewal": 50
+    },
+    {
+      "month": "Aug",
+      "New": 23,
+      "Renewal": 95
     }
   ],
   "initiatives": {
@@ -439,161 +467,201 @@ window.dashboardData = {
         "date": "07/30/2026",
         "newAnnualMembers": 0,
         "newLifetimeMembers": 0
+      },
+      {
+        "region": "North Central Regional",
+        "location": "Detroit, Michigan",
+        "date": "08/04/2026",
+        "newAnnualMembers": 12,
+        "newLifetimeMembers": 0
+      },
+      {
+        "region": "Georgia Regional",
+        "location": "Duluth, GA",
+        "date": "08/06/2026",
+        "newAnnualMembers": 4,
+        "newLifetimeMembers": 0
+      },
+      {
+        "region": "Upper Midwest Regional",
+        "location": "Chicago, IL",
+        "date": "08/11/2026",
+        "newAnnualMembers": 7,
+        "newLifetimeMembers": 1
+      },
+      {
+        "region": "Northwest Regional",
+        "location": "Portland, OR",
+        "date": "08/18/2026",
+        "newAnnualMembers": 19,
+        "newLifetimeMembers": 0
+      },
+      {
+        "region": "Alabama Regional",
+        "location": "Birmingham, AL",
+        "date": "08/25/2026",
+        "newAnnualMembers": 1,
+        "newLifetimeMembers": 0
       }
-    ]
+    ],
+    "wwyb": {
+      "description": "A cold email campaign aimed at intentionally sharing the value of an AAHOA membership with non-members of all kinds.",
+      "totalProspects": 14000,
+      "inboxes": 20,
+      "completedContacts": 611,
+      "newMemberships": 4,
+      "revenueGenerated": 597,
+      "businessDevelopmentLeads": 1,
+      "uniqueReplies": 17,
+      "bounceRate": 3.5
+    }
   },
   "expirationPipeline": [
     {
-      "region": "Upper Midwest",
-      "members": 22,
-      "earliestExpiration": "08/04/2026",
-      "latestExpiration": "08/18/2026"
-    },
-    {
-      "region": "Georgia",
-      "members": 18,
-      "earliestExpiration": "08/06/2026",
-      "latestExpiration": "08/27/2026"
-    },
-    {
-      "region": "Northwest",
-      "members": 16,
-      "earliestExpiration": "08/04/2026",
-      "latestExpiration": "08/26/2026"
-    },
-    {
-      "region": "Southeast Texas",
-      "members": 6,
-      "earliestExpiration": "08/03/2026",
-      "latestExpiration": "08/05/2026"
-    },
-    {
-      "region": "Alabama",
-      "members": 5,
-      "earliestExpiration": "08/07/2026",
-      "latestExpiration": "08/17/2026"
-    },
-    {
-      "region": "North Central",
-      "members": 5,
-      "earliestExpiration": "08/14/2026",
-      "latestExpiration": "08/21/2026"
-    },
-    {
-      "region": "North Pacific",
-      "members": 4,
-      "earliestExpiration": "08/11/2026",
-      "latestExpiration": "08/29/2026"
-    },
-    {
       "region": "Washington D.C. Area",
-      "members": 4,
-      "earliestExpiration": "08/04/2026",
-      "latestExpiration": "08/31/2026"
-    },
-    {
-      "region": "South Central Texas",
-      "members": 3,
-      "earliestExpiration": "08/05/2026",
-      "latestExpiration": "08/09/2026"
-    },
-    {
-      "region": "Greater Los Angeles Area",
-      "members": 2,
-      "earliestExpiration": "08/09/2026",
-      "latestExpiration": "08/09/2026"
+      "members": 17,
+      "earliestExpiration": "09/03/2026",
+      "latestExpiration": "09/21/2026"
     },
     {
       "region": "Mid Atlantic",
+      "members": 14,
+      "earliestExpiration": "09/12/2026",
+      "latestExpiration": "09/18/2026"
+    },
+    {
+      "region": "Gulf",
+      "members": 3,
+      "earliestExpiration": "09/05/2026",
+      "latestExpiration": "09/18/2026"
+    },
+    {
+      "region": "North Texas",
+      "members": 3,
+      "earliestExpiration": "09/05/2026",
+      "latestExpiration": "09/15/2026"
+    },
+    {
+      "region": "Southwest",
+      "members": 3,
+      "earliestExpiration": "09/08/2026",
+      "latestExpiration": "09/24/2026"
+    },
+    {
+      "region": "Upper Midwest",
+      "members": 3,
+      "earliestExpiration": "09/06/2026",
+      "latestExpiration": "09/30/2026"
+    },
+    {
+      "region": "Georgia",
       "members": 2,
-      "earliestExpiration": "08/06/2026",
-      "latestExpiration": "08/18/2026"
+      "earliestExpiration": "09/02/2026",
+      "latestExpiration": "09/05/2026"
     },
     {
       "region": "Mid South",
       "members": 2,
-      "earliestExpiration": "08/15/2026",
-      "latestExpiration": "08/18/2026"
+      "earliestExpiration": "09/05/2026",
+      "latestExpiration": "09/09/2026"
     },
     {
-      "region": "Northeast",
+      "region": "Northwest",
       "members": 2,
-      "earliestExpiration": "08/17/2026",
-      "latestExpiration": "08/19/2026"
+      "earliestExpiration": "09/05/2026",
+      "latestExpiration": "09/30/2026"
     },
     {
       "region": "South Carolina",
       "members": 2,
-      "earliestExpiration": "08/05/2026",
-      "latestExpiration": "08/20/2026"
+      "earliestExpiration": "09/10/2026",
+      "latestExpiration": "09/11/2026"
+    },
+    {
+      "region": "South Florida",
+      "members": 2,
+      "earliestExpiration": "09/03/2026",
+      "latestExpiration": "09/22/2026"
+    },
+    {
+      "region": "Southeast Texas",
+      "members": 2,
+      "earliestExpiration": "09/19/2026",
+      "latestExpiration": "09/25/2026"
+    },
+    {
+      "region": "Alabama",
+      "members": 1,
+      "earliestExpiration": "09/12/2026",
+      "latestExpiration": "09/12/2026"
     },
     {
       "region": "Arkansas",
       "members": 1,
-      "earliestExpiration": "08/26/2026",
-      "latestExpiration": "08/26/2026"
+      "earliestExpiration": "09/09/2026",
+      "latestExpiration": "09/09/2026"
     },
     {
       "region": "Central Midwest",
       "members": 1,
-      "earliestExpiration": "08/21/2026",
-      "latestExpiration": "08/21/2026"
+      "earliestExpiration": "09/08/2026",
+      "latestExpiration": "09/08/2026"
     },
     {
-      "region": "North Carolina",
+      "region": "International",
       "members": 1,
-      "earliestExpiration": "08/07/2026",
-      "latestExpiration": "08/07/2026"
+      "earliestExpiration": "09/17/2026",
+      "latestExpiration": "09/17/2026"
     },
     {
-      "region": "North Florida",
+      "region": "North Pacific",
       "members": 1,
-      "earliestExpiration": "08/24/2026",
-      "latestExpiration": "08/24/2026"
+      "earliestExpiration": "09/09/2026",
+      "latestExpiration": "09/09/2026"
     },
     {
-      "region": "North Texas",
+      "region": "Northeast",
       "members": 1,
-      "earliestExpiration": "08/03/2026",
-      "latestExpiration": "08/03/2026"
+      "earliestExpiration": "09/15/2026",
+      "latestExpiration": "09/15/2026"
     },
     {
-      "region": "South Florida",
+      "region": "South Central Texas",
       "members": 1,
-      "earliestExpiration": "08/20/2026",
-      "latestExpiration": "08/20/2026"
+      "earliestExpiration": "09/19/2026",
+      "latestExpiration": "09/19/2026"
     },
     {
-      "region": "Southwest",
+      "region": "South Pacific",
       "members": 1,
-      "earliestExpiration": "08/28/2026",
-      "latestExpiration": "08/28/2026"
+      "earliestExpiration": "09/11/2026",
+      "latestExpiration": "09/11/2026"
     }
   ],
   "activeMembers": [
     {
       "membershipType": "Lifetime",
-      "totalMembers": 6162
+      "totalMembers": 6168
     },
     {
       "membershipType": "Lifetime Member - Spouse",
-      "totalMembers": 5677
+      "totalMembers": 5680
     },
     {
       "membershipType": "Lifetime Member - Future Hotelier",
-      "totalMembers": 2999
+      "totalMembers": 3002
     },
     {
       "membershipType": "Annual",
-      "totalMembers": 1278
+      "totalMembers": 1285
     },
     {
       "membershipType": "Annual Member - Spouse",
-      "totalMembers": 606
+      "totalMembers": 614
     },
     {
       "membershipType": "Annual Member - Future Hotelier",
-      "totalMembers": 204
+      "totalMembers": 201
     }
   ]
 };
