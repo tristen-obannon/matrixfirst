@@ -61,7 +61,7 @@
       <section class="briefing-grid" aria-label="Executive briefing">
         <article class="briefing-card">
           <p class="section-label">Executive Briefing</p>
-          <h2>What the numbers are saying</h2>
+          <h2>Membership performance, in context</h2>
           <div class="briefing-copy" id="briefing-copy"></div>
         </article>
 
@@ -81,26 +81,26 @@
           </div>
         </div>
         <div class="initiative-switcher" aria-label="Initiative view">
-          <button class="initiative-tab is-active" type="button" data-initiative="hocs">HOCs</button>
-          <button class="initiative-tab" type="button" data-initiative="wwyb">Cold Email Campaign</button>
+          <button class="initiative-tab is-active" type="button" data-initiative="wwyb">Cold Email Campaign</button>
+          <button class="initiative-tab" type="button" data-initiative="hocs">Hotel Owner Conferences</button>
         </div>
-        <article class="initiative-panel is-active" data-initiative-panel="hocs">
-          <div class="initiative-program-header">
-            <span>Current Initiative</span>
-            <h3>Hotel Owner Conferences</h3>
-            <p>Completed and in-period regional events through August 31, 2026.</p>
-          </div>
-          <div class="initiative-summary" id="hoc-summary" aria-label="Hotel Owner Conference totals"></div>
-          <div class="hoc-grid" id="hoc-initiative-list"></div>
-          <div class="initiative-total" id="hoc-cumulative-total"></div>
-        </article>
-        <article class="initiative-panel" data-initiative-panel="wwyb">
+        <article class="initiative-panel is-active" data-initiative-panel="wwyb">
           <div class="initiative-program-header">
             <span>Campaign Initiative</span>
             <h3>We Want You Back</h3>
             <p id="wwyb-description"></p>
           </div>
           <div class="campaign-stats" id="wwyb-stats"></div>
+        </article>
+        <article class="initiative-panel" data-initiative-panel="hocs">
+          <div class="initiative-program-header">
+            <span>Conference Initiative</span>
+            <h3>Hotel Owner Conferences</h3>
+            <p>Completed regional events through September 14, 2026.</p>
+          </div>
+          <div class="initiative-summary" id="hoc-summary" aria-label="Hotel Owner Conference totals"></div>
+          <div class="hoc-grid" id="hoc-initiative-list"></div>
+          <div class="initiative-total" id="hoc-cumulative-total"></div>
         </article>
       </section>
 
@@ -183,7 +183,7 @@
     </main>
   </div>
 
-  <script src="./dashboard-data.js?v=2026-09-01"></script>
+  <script src="./dashboard-data.js?v=2026-10-01"></script>
   <script src="./app.js"></script>
 </body>
 </html>
