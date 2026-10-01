@@ -141,18 +141,16 @@ function renderInitiatives(initiatives = {}) {
   wwybDescription.textContent = `${wwyb.description || ""} The campaign is supported by ${formatInteger(wwyb.inboxes)} inboxes across Outlook, Gmail, and Zoho.`;
 
   const campaignStats = [
-    { label: "New Memberships", value: formatInteger(wwyb.newMemberships) },
-    { label: "Revenue Generated", value: formatCurrency(wwyb.revenueGenerated) },
+    { label: "Revenue Generated", value: formatCurrency(wwyb.revenueGenerated), featured: true },
+    { label: "New Memberships", value: formatInteger(wwyb.newMemberships), featured: true },
     { label: "Unique Replies", value: formatInteger(wwyb.uniqueReplies) },
     { label: "Business Development Leads", value: formatInteger(wwyb.businessDevelopmentLeads) },
-    { label: "Completed Sequence", value: formatInteger(wwyb.completedContacts) },
+    { label: "Completed Sequence", value: `${formatInteger(wwyb.completedContacts)} of ${formatInteger(wwyb.totalProspects)}` },
     { label: "Bounce Rate", value: formatPercent(wwyb.bounceRate) },
-    { label: "Estimated Prospects", value: `~${formatInteger(wwyb.totalProspects)}` },
-    { label: "Campaign Inboxes", value: formatInteger(wwyb.inboxes) },
   ];
 
   wwybStats.innerHTML = campaignStats.map((stat) => `
-    <span>
+    <span class="campaign-stat${stat.featured ? " is-featured" : ""}">
       <span>${escapeHtml(stat.label)}</span>
       <strong>${escapeHtml(stat.value)}</strong>
     </span>
@@ -160,40 +158,50 @@ function renderInitiatives(initiatives = {}) {
 }
 
 function renderBriefing(data) {
-  const topMonth = data.topMonths[0];
-  const secondMonth = data.topMonths[1];
-  const topRegion = data.topRegions[0];
-  const secondRegion = data.topRegions[1];
-  const latestRetention = data.renewalRateSeries[data.renewalRateSeries.length - 1];
-  const strongestRetention = [...data.renewalRateSeries].sort((a, b) => b.rate - a.rate)[0];
-  const weakestRetention = [...data.renewalRateSeries].sort((a, b) => a.rate - b.rate)[0];
-  const topMonthLead = topMonth.totalMembers - secondMonth.totalMembers;
-  const topRegionLead = topRegion.totalMembers - secondRegion.totalMembers;
-  const retentionSpread = strongestRetention.rate - weakestRetention.rate;
+  const annualRevenueYoY = data.revenueYoY.find((entry) => entry.membership === "Annual") || {};
+  const annualRevenueDifference = Number(annualRevenueYoY.difference || 0);
+  const annualRevenueDifferenceLabel = `${annualRevenueDifference >= 0 ? "+" : "-"}${formatCurrency(Math.abs(annualRevenueDifference))}`;
+  const northwestHoc = (data.initiatives?.hocs || []).find((hoc) => hoc.region === "Northwest Regional") || {};
+  const northwestHocMembers = (northwestHoc.newAnnualMembers || 0) + (northwestHoc.newLifetimeMembers || 0);
+  const coldEmailCampaign = data.initiatives?.wwyb || {};
 
   document.getElementById("briefing-copy").innerHTML = `
-    <section class="briefing-block">
-      <h3>Portfolio snapshot</h3>
-      <ul>
-        <li>New membership is driving year-to-date growth, nearly doubling renewals through ${data.currentThrough.replace("Current through ", "")}. The next opportunity is ensuring those members remain engaged and renew in future cycles.</li>
-        <li>Membership revenue is balanced across annual and lifetime dues, which limits dependence on one membership class for year-to-date revenue performance.</li>
-        <li>The current expiration pipeline is limited compared with the active member base, so immediate retention follow-up can stay focused on a small set of members.</li>
-      </ul>
+    <section class="briefing-summary">
+      <span>Executive Summary</span>
+      <p>AAHOA's membership momentum is coming from a broader development mix: team travel is keeping membership conversations active, regional events are creating timely opportunities, and targeted outreach is adding another path for converting interest into membership. The opportunity now is to carry that rhythm forward, turn travel into stronger regional pipelines, and build a steadier foundation for continued membership growth.</p>
     </section>
-    <section class="briefing-block">
-      <h3>Momentum</h3>
-      <ul>
-        <li>${fullMonth(topMonth.month)} is the strongest month for combined new members and renewals, ahead of ${fullMonth(secondMonth.month)} by ${formatInteger(topMonthLead)} members.</li>
-        <li>Annual is the leading source of new members and represents the biggest opportunity for continued membership growth.</li>
-        <li>${topRegion.region} leads all regions in combined new members and renewals, ahead of ${secondRegion.region} by ${formatInteger(topRegionLead)} members.</li>
-      </ul>
+    <section class="briefing-insight">
+      <div class="briefing-insight-header">
+        <span>Northwest HOC</span>
+        <strong>${formatInteger(northwestHocMembers)}</strong>
+      </div>
+      <p>Even within a busy travel schedule, the Northwest stop stood out: the golf tournament was followed by the year's strongest HOC membership result.</p>
+      <div class="briefing-insight-meta">
+        <span><strong>${formatInteger(northwestHoc.newAnnualMembers || 0)}</strong> new annual members</span>
+        <span>${escapeHtml(northwestHoc.date || "08/18/2026")}</span>
+      </div>
     </section>
-    <section class="briefing-block">
-      <h3>Retention and base</h3>
-      <ul>
-        <li>Renewal performance is uneven month to month: ${fullMonth(strongestRetention.month)} has the strongest renewal percentage, while ${fullMonth(weakestRetention.month)} is the low point, a spread of ${formatPercent(retentionSpread)}.</li>
-        <li>Lifetime remains the largest active membership class, while Annual is the more immediate lever for renewal follow-up and near-term member growth.</li>
-      </ul>
+    <section class="briefing-insight">
+      <div class="briefing-insight-header">
+        <span>Annual Revenue YoY</span>
+        <strong>${formatSignedPercent(annualRevenueYoY.growthPercent)}</strong>
+      </div>
+      <p>Annual membership revenue is ahead of ${Number(annualRevenueYoY.year || data.year) - 1}, providing the portfolio's clearest positive revenue movement.</p>
+      <div class="briefing-insight-meta">
+        <span><strong>${formatCurrency(annualRevenueYoY.revenue)}</strong> YTD</span>
+        <span>${annualRevenueDifferenceLabel} vs ${Number(annualRevenueYoY.year || data.year) - 1}</span>
+      </div>
+    </section>
+    <section class="briefing-insight">
+      <div class="briefing-insight-header">
+        <span>Campaign Conversion</span>
+        <strong>${formatInteger(coldEmailCampaign.newMemberships || 0)}</strong>
+      </div>
+      <p>The Cold Email Campaign is beginning to turn non-member outreach into paid memberships and new Business Development follow-up.</p>
+      <div class="briefing-insight-meta">
+        <span><strong>${formatCurrency(coldEmailCampaign.revenueGenerated || 0)}</strong> revenue generated</span>
+        <span>${formatInteger(coldEmailCampaign.businessDevelopmentLeads || 0)} Business Development leads</span>
+      </div>
     </section>
   `;
 }
@@ -384,7 +392,7 @@ function renderHorizontalBars(id, rows, { valueFormatter }) {
 
   target.innerHTML = `
     <div class="hbar-chart" role="img" aria-label="Horizontal bar chart">
-      ${rows.map((row) => {
+      ${rows.map((row, index) => {
         const width = Math.max((row.value / max) * 100, 1);
         return `
           <div class="hbar-row">
