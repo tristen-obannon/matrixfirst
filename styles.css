@@ -363,6 +363,13 @@ h2 {
   line-height: 1.55;
 }
 
+.briefing-summary p strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #fff;
+  font-weight: 900;
+}
+
 .briefing-insight {
   position: relative;
   min-height: 198px;
@@ -383,6 +390,14 @@ h2 {
   inset: 0 0 auto;
   height: 4px;
   background: linear-gradient(90deg, var(--aahoa-blue), var(--aahoa-cyan));
+}
+
+.briefing-insight:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--aahoa-cyan), var(--aahoa-sky));
+}
+
+.briefing-insight:nth-child(3)::before {
+  background: linear-gradient(90deg, var(--aahoa-sky), var(--aahoa-blue));
 }
 
 .briefing-insight-header {
@@ -795,6 +810,17 @@ h2 {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.campaign-stat {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.065)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
 .campaign-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(108px, 1fr));
@@ -802,19 +828,11 @@ h2 {
 }
 
 .campaign-stat {
-  position: relative;
-  overflow: hidden;
   min-height: 78px;
   padding: 12px 13px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-sm);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.065)),
-    rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .campaign-stat strong,
@@ -971,6 +989,11 @@ h2 {
 
 .chart-axis {
   stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.chart-gridline {
+  stroke: rgba(91, 102, 117, 0.18);
   stroke-width: 1;
 }
 
@@ -1410,4 +1433,11 @@ tbody tr:last-child td {
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+.chart-note {
+  color: #52657a;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0.35rem 0 0;
 }
