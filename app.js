@@ -145,7 +145,7 @@ function renderInitiatives(initiatives = {}) {
     { label: "New Memberships", value: formatInteger(wwyb.newMemberships), featured: true },
     { label: "Unique Replies", value: formatInteger(wwyb.uniqueReplies) },
     { label: "Business Development Leads", value: formatInteger(wwyb.businessDevelopmentLeads) },
-    { label: "Completed Sequence", value: `${formatInteger(wwyb.completedContacts)} of ${formatInteger(wwyb.totalProspects)}` },
+    { label: "Percentage of Completion", value: formatPercent(wwyb.completionPercent) },
     { label: "Bounce Rate", value: formatPercent(wwyb.bounceRate) },
   ];
 
@@ -210,7 +210,7 @@ function renderSignals(data) {
   const topMonth = data.topMonths[0];
   const topRegion = data.topRegions[0];
   const activeLeader = data.activeMembers[0];
-  const latestRetention = data.renewalRateSeries[data.renewalRateSeries.length - 1];
+  const latestRetention = data.renewalRateSeries.filter((item) => item.rate !== null).at(-1);
   const topRevenueMonth = [...data.topMonths].sort((a, b) => b.revenue - a.revenue)[0];
 
   const signals = [
@@ -225,7 +225,7 @@ function renderSignals(data) {
       value: formatInteger(topRegion.totalMembers),
     },
     {
-      title: "Latest Renewal Rate",
+      title: "Latest Available Renewal Rate",
       subtitle: `${fullMonth(latestRetention.month)} renewal retention percentage`,
       value: formatPercent(latestRetention.rate),
     },
@@ -306,6 +306,14 @@ function renderRenewalRateChart(series) {
     valueFormatter: formatPercent,
     maxValue: 100,
   });
+  const unavailable = series.filter((item) => item.rate === null);
+  if (unavailable.length) {
+    const detail = unavailable.map((item) =>
+      `${fullMonth(item.month)}: ${formatInteger(item.renewalCount)} renewals against ${formatInteger(item.eligibleCount)} eligible members`
+    ).join("; ");
+    document.getElementById("renewal-rate-chart").insertAdjacentHTML("beforeend",
+      `<p class="chart-note">Rate not shown where the source rate exceeds 100% (${escapeHtml(detail)}).</p>`);
+  }
 }
 
 function renderRevenueChart(months, series) {
@@ -445,18 +453,21 @@ function renderLineChart(id, rows, { color, valueFormatter, maxValue }) {
   const chartHeight = height - pad.top - pad.bottom;
   const points = rows.map((row, index) => {
     const x = pad.left + (chartWidth / Math.max(rows.length - 1, 1)) * index;
-    const y = pad.top + chartHeight - (row.value / max) * chartHeight;
+    const y = row.value === null ? null : pad.top + chartHeight - (row.value / max) * chartHeight;
     return { ...row, x, y };
   });
-  const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+  const path = points.map((point, index) => point.y === null ? "" :
+    `${index === 0 || points[index - 1].y === null ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
 
   target.innerHTML = `
     <svg class="svg-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Line chart">
       <line class="chart-axis" x1="${pad.left}" y1="${height - pad.bottom}" x2="${width - pad.right}" y2="${height - pad.bottom}"></line>
       <path d="${path}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
       ${points.map((point) => `
-        <circle cx="${point.x}" cy="${point.y}" r="5" fill="${color}"></circle>
-        <text class="chart-subtle" x="${point.x}" y="${point.y - 12}" text-anchor="middle">${valueFormatter(point.value)}</text>
+        ${point.y === null ? "" : `
+          <circle cx="${point.x}" cy="${point.y}" r="5" fill="${color}"></circle>
+          <text class="chart-subtle" x="${point.x}" y="${point.y - 12}" text-anchor="middle">${valueFormatter(point.value)}</text>
+        `}
         <text class="chart-label" x="${point.x}" y="${height - 18}" text-anchor="middle">${escapeHtml(point.label)}</text>
       `).join("")}
     </svg>
