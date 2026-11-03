@@ -1,1443 +1,189 @@
-:root {
-  --aahoa-navy: #073763;
-  --aahoa-blue: #004b8d;
-  --aahoa-cyan: #1f7f9b;
-  --aahoa-sky: #9ed0ea;
-  --aahoa-ice: #eaf5fb;
-  --aahoa-gold: #caa24d;
-  --ink: #122033;
-  --muted: #5f6d7d;
-  --soft-muted: #8492a3;
-  --page: #f5f8fc;
-  --surface: #ffffff;
-  --surface-blue: #f0f7fc;
-  --line: #d8e4ee;
-  --line-strong: #bfd0df;
-  --positive: #1f7a4d;
-  --negative: #b42318;
-  --shadow-soft: 0 16px 45px rgba(7, 55, 99, 0.09);
-  --shadow-card: 0 12px 28px rgba(7, 55, 99, 0.08);
-  --radius-lg: 24px;
-  --radius-md: 18px;
-  --radius-sm: 12px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Manrope", sans-serif;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 4% 0%, rgba(31, 127, 155, 0.18), transparent 34rem),
-    radial-gradient(circle at 92% 12%, rgba(158, 208, 234, 0.26), transparent 32rem),
-    linear-gradient(180deg, #f8fbfe 0%, var(--page) 42%, #eef4f9 100%);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.52;
-  background-image:
-    linear-gradient(rgba(7, 55, 99, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7, 55, 99, 0.045) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: linear-gradient(180deg, #000 0%, transparent 76%);
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-.app-shell {
-  min-height: 100vh;
-}
-
-.topbar {
-  min-height: 92px;
-  padding: 18px clamp(18px, 4vw, 52px);
-  background:
-    linear-gradient(135deg, rgba(7, 55, 99, 0.98), rgba(0, 75, 141, 0.98)),
-    var(--aahoa-navy);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border-bottom: 4px solid var(--aahoa-cyan);
-}
-
-.brand-lockup {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 118px;
-  height: 58px;
-  padding: 10px 13px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-.brand-lockup img {
-  width: 92px;
-  height: auto;
-  display: block;
-}
-
-main {
-  width: min(1460px, calc(100% - 48px));
-  margin: 0 auto;
-  padding: 32px 0 64px;
-}
-
-.report-header {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 28px;
-  align-items: end;
-  overflow: hidden;
-  padding: clamp(28px, 5vw, 48px);
-  border: 1px solid rgba(191, 208, 223, 0.88);
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(112deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.9) 58%, rgba(234, 245, 251, 0.92) 100%),
-    var(--surface);
-  box-shadow: var(--shadow-soft);
-}
-
-.report-header::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 9px;
-  background: linear-gradient(180deg, var(--aahoa-cyan), var(--aahoa-blue), var(--aahoa-gold));
-}
-
-.report-header::after {
-  content: "";
-  position: absolute;
-  right: -112px;
-  top: -126px;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  border: 42px solid rgba(31, 127, 155, 0.1);
-}
-
-.report-intro,
-.header-stat {
-  position: relative;
-  z-index: 1;
-}
-
-.eyebrow,
-.section-label,
-.metric-label,
-.header-stat-label {
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  font-size: 0.71rem;
-  font-weight: 900;
-  color: var(--aahoa-blue);
-}
-
-h1,
-h2,
-h3,
-p {
-  margin-top: 0;
-}
-
-h1 {
-  max-width: 780px;
-  margin: 10px 0 12px;
-  color: var(--aahoa-navy);
-  font-size: clamp(2.2rem, 4.6vw, 4.65rem);
-  line-height: 0.96;
-  letter-spacing: -0.055em;
-}
-
-h2 {
-  color: var(--ink);
-  letter-spacing: -0.035em;
-}
-
-.report-intro p:not(.eyebrow) {
-  max-width: 760px;
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 1.02rem;
-  line-height: 1.7;
-}
-
-.header-stat {
-  min-width: 242px;
-  padding: 18px 20px;
-  border: 1px solid rgba(191, 208, 223, 0.92);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 12px 25px rgba(7, 55, 99, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.header-stat strong {
-  display: block;
-  margin-top: 8px;
-  color: var(--aahoa-navy);
-  font-size: 2.15rem;
-  line-height: 1;
-  letter-spacing: -0.045em;
-}
-
-.kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
-  margin: 22px 0 20px;
-}
-
-.metric {
-  position: relative;
-  min-height: 154px;
-  overflow: hidden;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  border: 1px solid rgba(191, 208, 223, 0.9);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 252, 255, 0.94)),
-    var(--surface);
-  box-shadow: var(--shadow-card);
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-}
-
-.metric::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: linear-gradient(90deg, var(--aahoa-cyan), var(--aahoa-sky));
-}
-
-.metric:hover {
-  transform: translateY(-2px);
-  border-color: rgba(31, 127, 155, 0.44);
-  box-shadow: 0 20px 42px rgba(7, 55, 99, 0.11);
-}
-
-.metric strong {
-  color: var(--aahoa-navy);
-  font-size: clamp(1.85rem, 3vw, 2.35rem);
-  line-height: 0.95;
-  letter-spacing: -0.055em;
-}
-
-.metric span:last-child {
-  color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.45;
-}
-
-.metric-primary {
-  border-color: rgba(7, 55, 99, 0.9);
-  background:
-    linear-gradient(145deg, rgba(0, 75, 141, 0.96), rgba(7, 55, 99, 1)),
-    var(--aahoa-blue);
-  color: #fff;
-}
-
-.metric-primary::before {
-  background: linear-gradient(90deg, var(--aahoa-gold), var(--aahoa-sky));
-}
-
-.metric-primary strong,
-.metric-primary .metric-label,
-.metric-primary span:last-child {
-  color: #fff;
-}
-
-.metric-primary span:last-child {
-  opacity: 0.82;
-}
-
-.briefing-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.65fr);
-  gap: 18px;
-  margin-bottom: 18px;
-}
-
-.briefing-card,
-.signal-card,
-.workspace,
-.data-explorer,
-.initiatives-section {
-  border: 1px solid rgba(191, 208, 223, 0.9);
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--shadow-soft);
-}
-
-.briefing-card,
-.signal-card {
-  padding: clamp(22px, 3vw, 30px);
-}
-
-.briefing-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.briefing-card::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 5px;
-  background: linear-gradient(180deg, var(--aahoa-blue), var(--aahoa-cyan));
-}
-
-.briefing-card h2,
-.signal-card h2,
-.workspace-header h2 {
-  margin: 7px 0 0;
-  font-size: clamp(1.25rem, 2vw, 1.68rem);
-  line-height: 1.12;
-}
-
-.briefing-copy {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: auto 1fr;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.briefing-summary {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(126px, 0.25fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 18px;
-  padding: 15px 17px;
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(105deg, rgba(7, 55, 99, 0.98), rgba(0, 75, 141, 0.93)),
-    var(--aahoa-navy);
-  box-shadow: 0 14px 28px rgba(0, 46, 88, 0.14);
-}
-
-.briefing-summary > span {
-  color: var(--aahoa-sky);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-.briefing-summary p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.92rem;
-  line-height: 1.55;
-}
-
-.briefing-summary p strong {
-  display: block;
-  margin-bottom: 4px;
-  color: #fff;
-  font-weight: 900;
-}
-
-.briefing-insight {
-  position: relative;
-  min-height: 198px;
-  padding: 17px 17px 16px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 252, 0.78)),
-    var(--surface);
-}
-
-.briefing-insight::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: linear-gradient(90deg, var(--aahoa-blue), var(--aahoa-cyan));
-}
-
-.briefing-insight:nth-child(2)::before {
-  background: linear-gradient(90deg, var(--aahoa-cyan), var(--aahoa-sky));
-}
-
-.briefing-insight:nth-child(3)::before {
-  background: linear-gradient(90deg, var(--aahoa-sky), var(--aahoa-blue));
-}
-
-.briefing-insight-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.briefing-insight-header span {
-  max-width: 130px;
-  color: var(--aahoa-blue);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-.briefing-insight-header strong {
-  color: var(--aahoa-navy);
-  font-size: clamp(1.45rem, 2vw, 2rem);
-  letter-spacing: -0.06em;
-  line-height: 0.95;
-  white-space: nowrap;
-}
-
-.briefing-insight p {
-  flex: 1;
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.55;
-}
-
-.briefing-insight-meta {
-  display: grid;
-  gap: 5px;
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 800;
-  line-height: 1.3;
-}
-
-.briefing-insight-meta span:first-child {
-  color: var(--aahoa-blue);
-}
-
-.briefing-insight-meta strong {
-  color: var(--aahoa-navy);
-  font-size: 0.9rem;
-  font-weight: 900;
-}
-
-.signal-card {
-  background:
-    linear-gradient(180deg, rgba(7, 55, 99, 0.96), rgba(0, 75, 141, 0.94)),
-    var(--aahoa-navy);
-  color: #fff;
-}
-
-.signal-card .section-label,
-.signal-card h2 {
-  color: #fff;
-}
-
-.signal-card .section-label {
-  opacity: 0.72;
-}
-
-.signal-list {
-  display: grid;
-  gap: 10px;
-  margin-top: 19px;
-}
-
-.signal-row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 12px;
-  align-items: center;
-  padding: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.075);
-}
-
-.signal-rank {
-  width: 32px;
-  height: 32px;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
-  font-weight: 900;
-  font-size: 0.82rem;
-}
-
-.signal-title {
-  display: block;
-  color: #fff;
-  font-weight: 900;
-}
-
-.signal-subtitle {
-  display: block;
-  margin-top: 3px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.83rem;
-  line-height: 1.35;
-}
-
-.signal-value {
-  color: var(--aahoa-sky);
-  font-weight: 900;
-  white-space: nowrap;
-}
-
-.workspace,
-.data-explorer,
-.initiatives-section {
-  position: relative;
-  overflow: hidden;
-  margin-top: 18px;
-  padding: clamp(22px, 3vw, 30px);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 253, 255, 0.94)),
-    var(--surface);
-}
-
-.workspace::before,
-.data-explorer::before,
-.initiatives-section::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 5px;
-  background: linear-gradient(90deg, var(--aahoa-blue), var(--aahoa-cyan), var(--aahoa-sky));
-}
-
-.initiatives-section {
-  padding-block: clamp(22px, 3vw, 32px);
-  background:
-    linear-gradient(135deg, rgba(7, 55, 99, 0.98) 0%, rgba(0, 75, 141, 0.93) 48%, rgba(31, 127, 155, 0.88) 100%),
-    var(--aahoa-navy);
-  color: #fff;
-}
-
-.initiatives-section::before {
-  background: linear-gradient(90deg, var(--aahoa-gold), var(--aahoa-sky), #ffffff);
-}
-
-.initiatives-section .section-label,
-.initiatives-section .workspace-header h2 {
-  color: #fff;
-}
-
-.initiatives-section .workspace-header p:not(.section-label) {
-  color: rgba(255, 255, 255, 0.74);
-}
-
-.initiatives-section .workspace-header {
-  margin-bottom: 16px;
-}
-
-.initiative-summary {
-  flex: 0 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(128px, 1fr));
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.initiative-summary > span {
-  min-width: 0;
-  padding: 11px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.09);
-}
-
-.initiative-summary strong,
-.initiative-summary span span {
-  display: block;
-}
-
-.initiative-summary strong {
-  color: #fff;
-  font-size: 1.34rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.initiative-summary span span {
-  margin-top: 5px;
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1.25;
-  text-transform: uppercase;
-}
-
-.initiative-switcher {
-  width: fit-content;
-  display: inline-flex;
-  gap: 5px;
-  margin: -2px 0 14px;
-  padding: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.09);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.initiative-tab {
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.03em;
-  padding: 9px 13px;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.initiative-tab:hover {
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-.initiative-tab.is-active {
-  background: #fff;
-  color: var(--aahoa-navy);
-  box-shadow: 0 10px 24px rgba(0, 30, 62, 0.18);
-}
-
-.initiative-panel {
-  display: none;
-  padding: clamp(14px, 2vw, 18px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.045)),
-    rgba(255, 255, 255, 0.055);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.initiative-panel.is-active {
-  display: block;
-  animation: fadeSlide 220ms ease both;
-}
-
-.initiative-program-header {
-  max-width: 760px;
-  margin: 0 0 12px;
-}
-
-.initiative-program-header span {
-  color: var(--aahoa-sky);
-  font-size: 0.74rem;
-  font-weight: 900;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-.initiative-program-header h3 {
-  margin: 5px 0 0;
-  color: #fff;
-  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
-  letter-spacing: -0.04em;
-}
-
-.initiative-program-header p {
-  margin: 5px 0 0;
-  color: rgba(255, 255, 255, 0.68);
-  line-height: 1.45;
-}
-
-.hoc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 8px;
-}
-
-.hoc-card {
-  min-height: 0;
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-sm);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.07)),
-    rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.hoc-detail {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-}
-
-.hoc-date {
-  display: inline-flex;
-  flex: 0 0 auto;
-  width: 80px;
-  justify-content: center;
-  padding: 5px 7px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--aahoa-sky);
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-
-.hoc-card h3 {
-  margin: 0;
-  color: #fff;
-  font-size: 0.92rem;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.hoc-card p {
-  margin: 3px 0 0;
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 0.78rem;
-}
-
-.hoc-metrics {
-  flex: 0 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-}
-
-.hoc-metrics > span {
-  min-width: 62px;
-  padding: 7px 8px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.hoc-metrics strong,
-.hoc-metrics span span {
-  display: block;
-}
-
-.hoc-metrics strong {
-  color: #fff;
-  font-size: 1.05rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.hoc-metrics span span {
-  margin-top: 3px;
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 0.62rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.initiative-total {
-  margin-top: 12px;
-  padding: 14px 16px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 4px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08)),
-    rgba(255, 255, 255, 0.08);
-}
-
-.initiative-total span {
-  color: var(--aahoa-sky);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
-.initiative-total strong {
-  grid-row: span 2;
-  color: #fff;
-  font-size: clamp(1.75rem, 3vw, 2.7rem);
-  line-height: 0.9;
-  letter-spacing: -0.07em;
-}
-
-.initiative-total p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.campaign-stat {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-sm);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.065)),
-    rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.campaign-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(108px, 1fr));
-  gap: 8px;
-}
-
-.campaign-stat {
-  min-height: 78px;
-  padding: 12px 13px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.campaign-stat strong,
-.campaign-stat > span {
-  display: block;
-}
-
-.campaign-stat strong {
-  color: #fff;
-  font-size: clamp(1.08rem, 1.35vw, 1.34rem);
-  line-height: 1;
-  letter-spacing: -0.035em;
-}
-
-.campaign-stat > span {
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 0.66rem;
-  font-weight: 900;
-  letter-spacing: 0.045em;
-  line-height: 1.25;
-  text-transform: uppercase;
-}
-
-.campaign-stat.is-featured {
-  grid-column: span 2;
-  min-height: 124px;
-  padding: 18px 20px;
-  border-color: rgba(255, 255, 255, 0.72);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.99), rgba(224, 243, 251, 0.96)),
-    #fff;
-  box-shadow: 0 18px 38px rgba(0, 30, 62, 0.2);
-}
-
-.campaign-stat.is-featured::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--aahoa-blue), var(--aahoa-cyan), var(--aahoa-sky));
-}
-
-.campaign-stat.is-featured > span {
-  color: var(--aahoa-blue);
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-}
-
-.campaign-stat.is-featured strong {
-  color: var(--aahoa-navy);
-  font-size: clamp(2.15rem, 4vw, 3.35rem);
-  letter-spacing: -0.075em;
-}
-
-.workspace-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 22px;
-  margin-bottom: 22px;
-}
-
-.workspace-header p:not(.section-label) {
-  max-width: 720px;
-  margin: 9px 0 0;
-  color: var(--muted);
-  line-height: 1.58;
-}
-
-.segmented-control {
-  flex: 0 0 auto;
-  display: inline-flex;
-  gap: 5px;
-  padding: 5px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface-blue);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
-}
-
-.segmented-control button {
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font: 900 0.78rem "Manrope", sans-serif;
-  padding: 10px 13px;
-  transition: background 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
-}
-
-.segmented-control button:hover {
-  color: var(--aahoa-blue);
-}
-
-.segmented-control button.is-active {
-  background: var(--aahoa-navy);
-  color: #fff;
-  box-shadow: 0 9px 18px rgba(7, 55, 99, 0.18);
-}
-
-.analysis-panel,
-.table-panel {
-  display: none;
-}
-
-.analysis-panel.is-active,
-.table-panel.is-active {
-  display: block;
-  animation: fadeSlide 220ms ease both;
-}
-
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chart-surface {
-  min-height: 280px;
-}
-
-.chart-large {
-  min-height: 410px;
-  padding: clamp(18px, 2.5vw, 28px);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 248, 252, 0.72)),
-    var(--surface);
-}
-
-.svg-chart {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-.chart-label {
-  fill: var(--ink);
-  font: 800 13px "Manrope", sans-serif;
-}
-
-.chart-subtle {
-  fill: var(--soft-muted);
-  font: 800 12px "Manrope", sans-serif;
-}
-
-.chart-axis {
-  stroke: var(--line-strong);
-  stroke-width: 1;
-}
-
-.chart-gridline {
-  stroke: rgba(91, 102, 117, 0.18);
-  stroke-width: 1;
-}
-
-.chart-empty {
-  min-height: 220px;
-  display: grid;
-  place-items: center;
-  color: var(--muted);
-  background: var(--surface-blue);
-  border-radius: var(--radius-md);
-}
-
-.hbar-chart {
-  display: grid;
-  gap: 14px;
-}
-
-.hbar-row {
-  display: grid;
-  grid-template-columns: minmax(190px, 0.58fr) minmax(220px, 1fr) minmax(54px, auto);
-  gap: 14px;
-  align-items: center;
-  padding: 8px 0;
-}
-
-.hbar-label {
-  color: var(--ink);
-  font-size: 0.9rem;
-  font-weight: 900;
-  line-height: 1.25;
-}
-
-.hbar-track {
-  height: 15px;
-  border-radius: 999px;
-  background: #e4edf5;
-  overflow: hidden;
-  box-shadow: inset 0 1px 2px rgba(7, 55, 99, 0.1);
-}
-
-.hbar-fill {
-  height: 100%;
-  min-width: 4px;
-  border-radius: inherit;
-  box-shadow: inset 0 -10px 16px rgba(7, 55, 99, 0.12);
-}
-
-.hbar-value {
-  color: var(--aahoa-navy);
-  font-size: 0.86rem;
-  font-weight: 900;
-  text-align: right;
-}
-
-.chart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 900;
-}
-
-.legend-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-}
-
-.yoy-summary {
-  min-height: 410px;
-  padding: clamp(18px, 2.5vw, 28px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(135deg, rgba(234, 245, 251, 0.95), rgba(255, 255, 255, 0.96)),
-    var(--surface);
-}
-
-.yoy-heading {
-  margin-bottom: 18px;
-}
-
-.yoy-heading h3 {
-  margin: 7px 0 0;
-  color: var(--aahoa-navy);
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
-  letter-spacing: -0.03em;
-}
-
-.yoy-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.yoy-card {
-  position: relative;
-  overflow: hidden;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  box-shadow: 0 12px 24px rgba(7, 55, 99, 0.07);
-}
-
-.yoy-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 5px;
-  background: var(--aahoa-cyan);
-}
-
-.yoy-card.positive::before {
-  background: var(--positive);
-}
-
-.yoy-card.negative::before {
-  background: var(--negative);
-}
-
-.yoy-card-label,
-.yoy-card-detail,
-.yoy-delta {
-  display: block;
-}
-
-.yoy-card-label {
-  color: var(--muted);
-  font-size: 0.74rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.11em;
-}
-
-.yoy-card strong {
-  display: block;
-  margin-top: 10px;
-  color: var(--aahoa-navy);
-  font-size: clamp(1.45rem, 3vw, 2.15rem);
-  line-height: 1;
-  letter-spacing: -0.055em;
-}
-
-.yoy-card-detail {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
-.yoy-delta {
-  margin-top: 12px;
-  font-size: 0.9rem;
-  font-weight: 900;
-}
-
-.yoy-card.positive .yoy-delta {
-  color: var(--positive);
-}
-
-.yoy-card.negative .yoy-delta {
-  color: var(--negative);
-}
-
-.table-wrap {
-  overflow: auto;
-  max-height: 460px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 620px;
-}
-
-thead {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-th,
-td {
-  padding: 13px 14px;
-  border-bottom: 1px solid var(--line);
-  text-align: left;
-  vertical-align: middle;
-  font-size: 0.89rem;
-}
-
-th {
-  background: linear-gradient(180deg, #edf5fa, #e7f0f7);
-  color: var(--aahoa-navy);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-tbody tr {
-  transition: background 140ms ease;
-}
-
-tbody tr:nth-child(even) {
-  background: #f8fbfe;
-}
-
-tbody tr:hover {
-  background: #edf7fb;
-}
-
-tbody tr:last-child td {
-  border-bottom: 0;
-}
-
-.rank-cell,
-.number-cell {
-  font-weight: 900;
-  color: var(--ink);
-}
-
-.rank-cell {
-  width: 62px;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: var(--aahoa-navy);
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 900;
-}
-
-.table-bar,
-.table-bar-track,
-.table-bar-fill {
-  display: none;
-}
-
-@media (max-width: 1080px) {
-  .report-header,
-  .briefing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .workspace-header {
-    flex-direction: column;
-  }
-
-  .initiative-summary {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hoc-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .campaign-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .campaign-stat.is-featured {
-    grid-column: span 1;
-  }
-
-  .segmented-control {
-    max-width: 100%;
-    overflow: auto;
-  }
-}
-
-@media (max-width: 1040px) {
-  .kpi-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .topbar {
-    min-height: 78px;
-    padding: 14px 18px;
-  }
-
-  .brand-lockup {
-    width: 108px;
-    height: 54px;
-  }
-
-  .brand-lockup img {
-    width: 84px;
-  }
-
-  main {
-    width: min(100% - 28px, 1460px);
-    padding: 20px 0 44px;
-  }
-
-  .report-header,
-  .briefing-card,
-  .signal-card,
-  .workspace,
-  .data-explorer,
-  .initiatives-section {
-    border-radius: 18px;
-  }
-
-  .report-header {
-    padding: 26px 22px;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  .header-stat {
-    width: 100%;
-  }
-
-  .kpi-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .briefing-copy {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-
-  .briefing-insight {
-    min-height: 0;
-  }
-
-  .briefing-summary {
-    grid-template-columns: 1fr;
-    gap: 7px;
-  }
-
-  .metric {
-    min-height: 132px;
-  }
-
-  .signal-row {
-    grid-template-columns: auto 1fr;
-  }
-
-  .signal-value {
-    grid-column: 2;
-  }
-
-  .initiative-switcher {
-    width: 100%;
-    overflow: auto;
-  }
-
-  .initiative-tab {
-    white-space: nowrap;
-  }
-
-  .hbar-row {
-    grid-template-columns: 1fr;
-    gap: 7px;
-  }
-
-  .hbar-value {
-    text-align: left;
-  }
-
-  .chart-large,
-  .yoy-summary {
-    min-height: 300px;
-    padding: 16px;
-  }
-
-  .yoy-grid {
-    grid-template-columns: 1fr;
-  }
-
-  th,
-  td {
-    padding: 12px;
-  }
-}
-
-@media (max-width: 520px) {
-  .initiative-summary,
-  .campaign-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .campaign-stat.is-featured {
-    grid-column: auto;
-  }
-
-  .hoc-card {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .initiative-total {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
-.chart-note {
-  color: #52657a;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  margin: 0.35rem 0 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AAHOA Membership Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=2026-11-01">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup" aria-label="AAHOA">
+        <img src="data:image/jpeg;base64,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hu65UpCLFYukS5cbUq0yQo1lhrPHSttQmhR8IZibEvmaLI2XPwXmmMAl7c3eotyrXJgtU64sOUYCjOgS4Ql8n/AAQYbec1+HVKl8mbVGzHtejU3DOXWu/bh0aTuXParw4NOldzOe9RzQ9gn4Jdo4ZjZ/qX6w9qiWlCKLVngzw8ktPAwzD2v1o4MkhPTH268B0/isgeIea/ouBahtS/zncMkexL7VenInnByQnSaTOpkhMnrOKMg5M8f0spuyzyyOenwVaKo+Zb0UcF8ZyxK0O1lFfDG+/Lf6ayRiMAEYtr2UJJGQ3o8qzE1myS86T18ujdalxgsS0WRU59b9CsILGRzi+YpmedjRXeLsrdM9gX8ToqwuaIwHD49RYxKLA6roUja+OBGKJN8qXSLzQ2Z7rCrFhCZxikK9AyDFGXIqN0kJGE0xrrT8qiKEAXALu+PNOtCBsVMDSGgqq3mS92g/yH4oNZQhF/YpuTCszoOmOUG9NfJG/jO5whOzaCHuzq6UINkTH3mSL8mjejiYSXoHJdprW8zfZL8FYJjzzqTBe0XaRgQsj6DZ5Uh7YPmpxosKLmAwN1mpPgMpHV5ue/C76y5q9ezD2qwhAzkMThuejvURGCTG9F7HbhNkhB0+4KUbSobmcy+ivvyqVWZygXtwSTN3xrppPTrC4momo0UKKB8OU7neoDRaPofVO2xOL3XvFPqJdgBqNVfG1cxKypl4JXGkg2SbMJGulMRDUK0aOMW0VHGtVvZMvn9/P/2gAMAwEAAgADAAAAEAgggggggggggggggggggggggggggggggggggggggggggggggggggggghbggggggghRAZRgVdXCwgghKhbNyygyDwgkYk8UgU8sIE8Agggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggv/xAAmEQEAAgIBAwIHAQAAAAAAAAABABEhMUFRYXGBoRAgMFBgscHh/9oACAEDAQE/EPvJjo+70gaVcXU/z6DFsYPoGHyQFaJsZw8twDOtfaY1mleObmzgg4ItWp5OIRPP6hXtnpv5NRtGDvO/IMl3435ill3cP9qWwPPBG5ijsu41qjTuo2e0rxCJ5ZRKLCi4zzA51kd+Sz4jUGPUMbiYsgrYiBsjiilv11EXKVMM8dHUpoHgRa6IZt8Df/8QAJxEBAAICAQMCBgMAAAAAAAAAAQARITFBUWFxgcEQIDBQYNGx4fD/2gAIAQIBAT8Q+8lP1x1jCvCej/f+5+gaaibI3Dw/qKC2aKcvDXt/MRXgvXrOGrFZvFdppZJTawm9Zw5uMFxx3j7v3rk+TeqFl7E7HZw1XS9eITDNS09rlbRwyuIIUbO6quWBRZod8QsLtfmPXoJYiaWwF44xuJrvA09mn4pcSneoj1MvSqKLgF0MBM2Fel3DnC3KpOTk3KJFOrNnHsivSwgPwN//xAAnEAEAAgICAgIBBAMBAAAAAAABESEAMUFhUXEQgSAwQJGxcMHwof/aAAgBAQABPxD/AB2iAMpKSYr7H9wfHF1DZJTB9LcCfvkOtJLdispKyBLJQsB2d+RKREp/bHwlFLMY3IgomJTKPoSC8rjzg6pAAVUhFFKXWytlkg3Yw3f4qQjTI8FWkfr8GkZohj0JeAPweJ8IZDWBzOHw/FQmQrhBACQmGysTZVi4lhUAALQZqOQQ1JS7eP4ODBqSV0jZuZLN5YKC8L6Qn2qAKgjxQldEw/dPAayiUf8AXSP2w9Oy7pKyPIjXRldT6HqkSESkRJHNXgOxA9qGILm5cgOgqDiX6BLfX3aZ4UIOKFxVICewlH/RhvMeBd3lmD2Jx8QthSUoFdCV6HI44mQAwHgkeZec3qKFANi+oHl5fDe5DyotNIJd5QKmQktrXi2hLzPVV/8AQ8sItGAQC9mAOYeDCsVls2j8wFEq3gMTaZxaovYrQh4RVIwiNkeaQ8nUyp2lmnHv9UzxW0L9m9uJgxOpBkLQhwiJ+ciHIrF+w4DmneJEmEggkvmnAeACNw/BXB/r8SPushwAshQufjBEIqz7jEVJdmV8lxWgZKAN6OcRvjOMM1pE3rEGNMeFAISKU6XEL58tsJL7yzduAeRSncZKyav3X1G+h/B4BIJVD7/9MZMeRQJU3Sh8+TKNkSoUu9QlxgnK2hpj7F9i8fk5o2S+2FCJHdxhi8dfDAKDeB5ws3EYnSEB9T95P5hgL8kojL2KxYurTyLCycN4s4oQwVOgTSyBU5NQTqcMhcXM3ZcqCsh0+GF1gggYUJ0nyY1EpjJ6hW3vNa/tf7xB4mKSSAnD1fOLZ5qQ0fiDrs1QyaZIPOL0JtsfJC4AkqaYnsIgKE3MCrtCbEMz0QA9cseKJRypnJCczIhi8dkhlUvASi94ODiqMYGkCKR8Y+EUKETYn4dVh6fZH2H1jExliiVRhqY9MJkZBiIE6q8uVdJo+ARHOw+QHKPdI5wThA1Gh0FDuZHo0uzESY0XU+fiZI6okn/khyHUtkP5lGehhrUH0T2PPwbEG3zzRRe6rFk0SSW2oVI/3DhEVOWeYAFuEDy3gYF4Qoep/wCMD92h2gXBQ0AlUlYqskTiWdJRQgHwYgN1uaT+XXxwxlM0ighVR7uMyNBBlmTBsE2yecab+jD7X+fP/9k=" alt="AAHOA">
+      </div>
+    </header>
+
+    <main>
+      <section class="report-header">
+        <div class="report-intro">
+          <p class="eyebrow">Membership Intelligence</p>
+          <h1 id="report-title">Membership Performance Overview</h1>
+          <p id="report-summary">A focused view of member growth, renewal momentum, revenue, and regional performance.</p>
+        </div>
+        <div class="header-stat">
+          <span class="header-stat-label">Current Reporting Period</span>
+          <strong id="report-period">2026</strong>
+        </div>
+      </section>
+
+      <section class="kpi-grid" aria-label="Membership performance highlights">
+        <article class="metric metric-primary">
+          <span class="metric-label">New Members</span>
+          <strong id="kpi-new-members">-</strong>
+          <span id="kpi-new-members-foot">Qualified growth across member categories</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Renewals</span>
+          <strong id="kpi-renewals">-</strong>
+          <span>Renewals completed through the current period</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Membership Revenue</span>
+          <strong id="kpi-revenue">-</strong>
+          <span>Combined annual and lifetime memberships</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Active Members</span>
+          <strong id="kpi-active-members">-</strong>
+          <span>Core member base</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Expiring Soon</span>
+          <strong id="kpi-expiring">-</strong>
+          <span>Upcoming retention opportunities</span>
+        </article>
+      </section>
+
+      <section class="briefing-grid" aria-label="Executive briefing">
+        <article class="briefing-card">
+          <p class="section-label">Executive Briefing</p>
+          <h2>Membership performance, in context</h2>
+          <div class="briefing-copy" id="briefing-copy"></div>
+        </article>
+
+        <article class="signal-card">
+          <p class="section-label">Fast Reads</p>
+          <h2>Signals to watch</h2>
+          <div class="signal-list" id="signal-list"></div>
+        </article>
+      </section>
+
+      <section class="initiatives-section" aria-label="Membership development initiatives">
+        <div class="workspace-header">
+          <div>
+            <p class="section-label">Membership Development</p>
+            <h2>Initiatives</h2>
+            <p>Track priority initiatives that support new annual and lifetime membership growth.</p>
+          </div>
+        </div>
+        <div class="initiative-switcher" aria-label="Initiative view">
+          <button class="initiative-tab is-active" type="button" data-initiative="wwyb">Cold Email Campaign</button>
+          <button class="initiative-tab" type="button" data-initiative="hocs">Hotel Owner Conferences</button>
+        </div>
+        <article class="initiative-panel is-active" data-initiative-panel="wwyb">
+          <div class="initiative-program-header">
+            <span>Campaign Initiative</span>
+            <h3>We Want You Back</h3>
+            <p id="wwyb-description"></p>
+          </div>
+          <div class="campaign-stats" id="wwyb-stats"></div>
+        </article>
+        <article class="initiative-panel" data-initiative-panel="hocs">
+          <div class="initiative-program-header">
+            <span>Conference Initiative</span>
+            <h3>Hotel Owner Conferences</h3>
+            <p>Completed regional events through October 29, 2026.</p>
+          </div>
+          <div class="initiative-summary" id="hoc-summary" aria-label="Hotel Owner Conference totals"></div>
+          <div class="hoc-grid" id="hoc-initiative-list"></div>
+          <div class="initiative-total" id="hoc-cumulative-total"></div>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="workspace-header">
+          <div>
+            <p class="section-label">Analysis Workspace</p>
+            <h2 id="analysis-title">Member acquisition by category</h2>
+            <p id="analysis-description">See which qualified membership categories are contributing the most new members.</p>
+          </div>
+          <div class="segmented-control" aria-label="Analysis view">
+            <button class="view-tab is-active" type="button" data-view="growth">Growth</button>
+            <button class="view-tab" type="button" data-view="retention">Retention</button>
+            <button class="view-tab" type="button" data-view="revenue">Revenue</button>
+            <button class="view-tab" type="button" data-view="revenue-yoy">YoY</button>
+            <button class="view-tab" type="button" data-view="regions">Regions</button>
+            <button class="view-tab" type="button" data-view="composition">Composition</button>
+          </div>
+        </div>
+
+        <article class="analysis-panel is-active" data-panel="growth">
+          <div class="chart-surface chart-large" id="new-members-chart"></div>
+        </article>
+        <article class="analysis-panel" data-panel="retention">
+          <div class="chart-surface chart-large" id="renewal-rate-chart"></div>
+        </article>
+        <article class="analysis-panel" data-panel="revenue">
+          <div class="chart-surface chart-large" id="revenue-chart"></div>
+        </article>
+        <article class="analysis-panel" data-panel="revenue-yoy">
+          <div class="yoy-summary" id="revenue-yoy-summary"></div>
+        </article>
+        <article class="analysis-panel" data-panel="regions">
+          <div class="chart-surface chart-large" id="regions-chart"></div>
+        </article>
+        <article class="analysis-panel" data-panel="composition">
+          <div class="chart-surface chart-large" id="member-mix-chart"></div>
+        </article>
+      </section>
+
+      <section class="data-explorer">
+        <div class="workspace-header">
+          <div>
+            <p class="section-label">Data Explorer</p>
+            <h2 id="table-title">Strongest months for new and renewed members</h2>
+            <p id="table-description">Ranked months with new members, renewals, combined membership count, and revenue.</p>
+          </div>
+          <div class="segmented-control" aria-label="Data table view">
+            <button class="table-tab is-active" type="button" data-table="months">Months</button>
+            <button class="table-tab" type="button" data-table="expirations">Expirations</button>
+            <button class="table-tab" type="button" data-table="active">Active Members</button>
+          </div>
+        </div>
+
+        <article class="table-panel is-active" data-table-panel="months">
+          <div class="table-wrap">
+            <table id="top-months-table">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+        <article class="table-panel" data-table-panel="expirations">
+          <div class="table-wrap">
+            <table id="expiration-table">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+        <article class="table-panel" data-table-panel="active">
+          <div class="table-wrap">
+            <table id="active-members-table">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="./dashboard-data.js?v=2026-11-03-wwyb-6"></script>
+  <script src="./app.js?v=2026-11-03-northwest-restored"></script>
+</body>
+</html>
